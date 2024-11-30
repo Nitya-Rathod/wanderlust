@@ -50,9 +50,8 @@ passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// Flash middleware
+// Middleware for locals
 app.use((req, res, next) => {
-    console.log("User in middleware:", req.user);
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
     res.locals.currUser = req.user; // This makes the user available to all views

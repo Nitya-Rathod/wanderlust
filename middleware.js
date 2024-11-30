@@ -5,7 +5,6 @@ const Review = require("./models/review.js");
 
 module.exports.isLoggedIn = (req, res, next) => {
     if (!req.isAuthenticated()) {
-        // save redirectUrl 
         req.session.redirectUrl = req.originalUrl;
         req.flash("error", "You must be logged in!");
         return res.redirect("/login");
@@ -16,7 +15,7 @@ module.exports.isLoggedIn = (req, res, next) => {
 //to save the OriginalUrl to locals
 module.exports.saveRedirectUrl = (req,res,next) => {
     if(req.session.redirectUrl){
-        res.locals.redirectUrl = req.session.redirectUrl;
+        return res.locals.redirectUrl = req.session.redirectUrl;
     }
     next();
 }
