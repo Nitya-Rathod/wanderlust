@@ -7,13 +7,13 @@ const Listing = require("../models/listing.js");
 const {validateReview, isLoggedIn, isReviewAuthor} = require("../middleware.js");
 
 // Post Review route
-router.post("/", isLoggedIn, isReviewAuthor,validateReview, wrapAsync(async(req,res) => {
+router.post("/", isLoggedIn, isReviewAuthor, validateReview, wrapAsync(async(req,res) => {
     let {id} = req.params;
     let listing = await Listing.findById(id);
     let newReview = new Review(req.body.review);
     newReview.author = req.user._id;
-
     listing.reviews.push(newReview);
+
     await newReview.save();
     await listing.save();
     req.flash("success", "New review Created !");
