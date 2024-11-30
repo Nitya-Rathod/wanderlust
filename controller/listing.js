@@ -21,7 +21,6 @@ module.exports.showListing = async (req,res)=>{
         req.flash("error", "The listing you are trying to access does not exist");
         res.redirect("/listings");
     }
-    console.log(listing);
     res.render("listings/show.ejs", {listing});
 }
 
@@ -36,8 +35,7 @@ module.exports.createListing = async (req, res)=>{
 
 // Edit
 module.exports.renderEditForm = async (req, res) => {
-    let { id } = req.params;
-    const listing = await Listing.findById(id);
+    let { id } = req.params;const listing = await Listing.findById(id);
     if(!listing){
         req.flash("error", "The listing you are trying to access does not exist");
         res.redirect("/listings");

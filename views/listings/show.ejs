@@ -9,7 +9,7 @@
         <img src="<%= listing.image %>" class="card-img-top show-img" alt="img_listing">
         <br>
         <div class="card-body">
-            <p class="card-text">Owned by:  <b><i></i></b></p>
+            <p class="card-text">Owned by:  <b><i><%= listing.owner.username %></i></b></p>
             <p class="card-text"><%= listing.description %></p>
             <p class="card-text"><%= listing.price.toLocaleString("en-IN") %></p>
             <p class="card-text"><%= listing.location %></p>
@@ -18,18 +18,18 @@
     </div>
     <br>
 
-
+    <% if(currUser && currUser._id.equals(listing.owner._id)){ %>
     <div class="btns">
         <a class="btn btn-dark col-1 offset-3 edit-btn mb-3" href="/listings/<%= listing._id %>/edit">Edit</a>
         <form action="/listings/<%= listing._id %>?_method=DELETE" method="post">
             <button class="btn btn-dark offset-5 mb-3" >Delete</button>
         </form> 
     </div>
-
+    <% } %>
     
 
     <!-- Review Section-->
-
+    <% if(currUser){ %>
     <div class="col-8 offset-3 mb-3">
         <hr>
         <h4>Leave a Review</h4>
@@ -67,5 +67,5 @@
             <% } %>
         </div>
     </div>
-
+    <% } %>
 </div>
